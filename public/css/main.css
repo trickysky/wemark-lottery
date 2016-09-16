@@ -1,0 +1,191 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding:0;
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+}
+.wrapper {
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 70%;
+    background: url('../images/lottery-bg.png') no-repeat;
+    background-size: 100%;
+}
+
+.background {
+    width: 100%;
+    background-color: #ff5601;
+    position: relative;
+    padding: 5%;
+    border-radius: 5%;
+}
+
+.prizes {
+    position: relative;
+    display: block;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+}
+
+.prizes li {
+    width: 24%;
+    height: 24%;
+    display: block;
+    position: absolute;
+    background-color: #ffed8a;
+    text-align: center;
+    color: #d16700;
+    border-radius: 10%;
+}
+
+.prizes .active {
+    background-color: #fffec6;
+}
+
+.prizes .p1 {
+    left: 0;
+    top: 0;
+}
+
+.prizes .p2 {
+    left: 25%;
+    top: 0;
+}
+
+.prizes .p3 {
+    left: 50%;
+    top: 0;
+}
+
+.prizes .p4 {
+    left: 75%;
+    top: 0;
+}
+
+.prizes .p5 {
+    left: 75%;
+    top: 25%;
+}
+
+.prizes .p6 {
+    left: 75%;
+    top: 50%;
+}
+
+.prizes .p7 {
+    left: 75%;
+    top: 75%;
+}
+
+.prizes .p8 {
+    left: 50%;
+    top: 75%;
+}
+
+.prizes .p9 {
+    left: 25%;
+    top: 75%;
+}
+
+.prizes .p10 {
+    left: 0;
+    top: 75%;
+}
+
+.prizes .p11 {
+    left: 0;
+    top: 50%;
+}
+
+.prizes .p12 {
+    left: 0;
+    top: 25%;
+}
+
+.dashboard {
+    background-color: rgb( 255, 205, 70);
+    position: absolute;
+    left: 30%;
+    top: 32%;
+    width: 39%;
+    height: 35%;
+    border-radius: 3px;
+    box-shadow: 0 0 5px 5px rgba(221, 169, 29, 0.4) inset;
+}
+
+.drawbtn {
+    background-color: #ff6a30;
+    position: absolute;
+    width: 60%;
+    height: 40%;
+    left: 20%;
+    top: 30%;
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    color: #ffed8a;
+    border-radius: 10%;
+}
+
+.drawbtn:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: #ffed8a;
+}
+
+#prod_info {
+    margin-top: 15%;
+    padding-bottom: 10%;
+}
+
+.modal-dialog {
+    margin-top: 10%;
+}
+
+.prize-text {
+    color: blue;
+    font-size: 16px;
+    font-weight: bolder;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: rgb( 255, 205, 70);
+    color: #000000;
+}
+
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #ff6a30;
+    color: #000000;
+}
+
+.table>tbody>tr>td {
+    border: none;
+}
+
+#start-btn {
+    color: red;
+    text-decoration: none;
+}
+
+#start-btn:hover {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#message {
+    background-color: #ffcd46;
+    border: none;
+}
