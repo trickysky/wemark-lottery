@@ -32,15 +32,13 @@ $(function () {
 
     $('#start-btn').bind('click', function () {
         $('#start-btn').remove();
-        $('#message-content').html('<i class="fa fa-spinner fa-spin fa-fw"></i>');
+        $('#message-content').html('正在定位中<i class="fa fa-spinner fa-spin fa-fw"></i>');
         if (!navigator.geolocation) {
             $('#message-content').text('浏览器不支持获取位置, 无法参与抽奖!');
         }
-
         function success(position) {
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
-            $('#message').removeClass('text-center');
             $('#message button').removeClass('hide');
             $.ajax({
                 type: 'POST',
@@ -56,6 +54,7 @@ $(function () {
                 dataType: "json",
                 success: function (data) {
                     $('#message-content i').remove();
+                    $('#message').removeClass('text-center');
                     if (0 == data['code']) {
                         type = data['data']['type'];
                         received = data['data']['received'];
@@ -95,7 +94,7 @@ $(function () {
                 },
                 error: function (xml, e) {
                     $('#message i').remove();
-                    $('#message-content').text('something error: error 1');
+                    $('#message-content').text('location query error');
                     console.log(e);
                 }
             });
@@ -116,7 +115,8 @@ $(function () {
     $('.confirm-btn').bind('click', confirmQuery);
 
     function confirmQuery() {
-        $('#message-content').html('<i class="fa fa-spinner fa-spin fa-fw"></i>');
+        $('#message-content').html('正在发放红包<i class="fa fa-spinner fa-spin fa-fw"></i>');
+        $('#message').addClass('text-center');
         $.ajax({
             type: 'POST',
             url: '/lottery/confirm',
@@ -131,6 +131,7 @@ $(function () {
             ContentType: "application/x-www-form-urlencoded",
             success: function (data) {
                 $('#message-content i').remove();
+                $('#message').removeClass('text-center');
                 if (0 == data['code']) {
                     $('#message-content').text('领奖成功, 请前往微信钱包查看!');
                 }
@@ -142,7 +143,8 @@ $(function () {
             },
             error: function (xml, e) {
                 $('#message-content i').remove();
-                $('#message-content').html('something error: error 1');
+                $('#message').removeClass('text-center');
+                $('#message-content').html('confirm query error');
                 console.log(e);
             }
         });
