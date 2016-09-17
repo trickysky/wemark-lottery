@@ -38,8 +38,8 @@ $(function () {
         }
 
         function success(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
             $('#message').removeClass('text-center');
             $('#message button').removeClass('hide');
             $.ajax({
@@ -55,7 +55,7 @@ $(function () {
                 ContentType: "application/x-www-form-urlencoded",
                 dataType: "json",
                 success: function (data) {
-                    $('#message i').remove();
+                    $('#message-content i').remove();
                     if (0 == data['code']) {
                         type = data['data']['type'];
                         received = data['data']['received'];
@@ -95,7 +95,7 @@ $(function () {
                 },
                 error: function (xml, e) {
                     $('#message i').remove();
-                    $('#message-content').text('something error');
+                    $('#message-content').text('something error: error 1');
                     console.log(e);
                 }
             });
@@ -116,11 +116,13 @@ $(function () {
     $('.confirm-btn').bind('click', confirmQuery);
 
     function confirmQuery() {
+        $('#message-content').html('<i class="fa fa-spinner fa-spin fa-fw"></i>');
         $.ajax({
             type: 'POST',
             url: '/lottery/confirm',
             data: {
                 'token': token,
+                'id': id,
                 '_csrf': _csrf,
                 'longitude': longitude,
                 'latitude': latitude
@@ -128,6 +130,7 @@ $(function () {
             dataType: "json",
             ContentType: "application/x-www-form-urlencoded",
             success: function (data) {
+                $('#message-content i').remove();
                 if (0 == data['code']) {
                     $('#message-content').text('领奖成功, 请前往微信钱包查看!');
                 }
@@ -136,6 +139,11 @@ $(function () {
                 }
                 $('#prize-info').modal('hide');
                 $('#message').removeClass('hide');
+            },
+            error: function (xml, e) {
+                $('#message-content i').remove();
+                $('#message-content').html('something error: error 1');
+                console.log(e);
             }
         });
         $('.confirm-btn').unbind('click');
