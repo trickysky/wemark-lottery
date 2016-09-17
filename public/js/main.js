@@ -7,8 +7,8 @@ $(function () {
         _csrf = $('#_csrf').text(),
         longitude ,
         latitude,
-        received = 'true' == $('#received').text(),
-        drawn = 'true' == $('#drawn').text(),
+        received = '1' == $('#received').text(),
+        drawn = '1' == $('#drawn').text(),
         type = $('#type').text(),
         prize_msg = $('#msg').text();
 
@@ -32,7 +32,7 @@ $(function () {
 
     $('#start-btn').bind('click', function () {
         $('#start-btn').remove();
-        $('#message-content').text('<i class="fa fa-spinner fa-spin fa-fw"></i>');
+        $('#message-content').html('<i class="fa fa-spinner fa-spin fa-fw"></i>');
         if (!navigator.geolocation) {
             $('#message-content').text('浏览器不支持获取位置, 无法参与抽奖!');
         }
