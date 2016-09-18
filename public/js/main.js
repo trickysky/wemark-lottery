@@ -57,8 +57,8 @@ $(function () {
                     $('#message').removeClass('text-center');
                     if (0 == data['code']) {
                         type = data['data']['type'];
-                        received = data['data']['received'];
-                        drawn = data['data']['drawn'];
+                        // received = data['data']['received'];
+                        // drawn = data['data']['drawn'];
                         prize_msg = data['data']['msg'];
                         if (drawn) {
                             if (received) {
