@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="author" content="trickysky">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <title>幸运抽奖</title>
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/font-awesome-4.5.0/css/font-awesome.min.css">
@@ -16,18 +16,16 @@
 <div class="wrapper">
     <div id="start">
         <button id="start-btn">
-            <span>点击定位<br></span>
+            <span>允许定位<br></span>
             <span>点击获取大奖</span>
         </button>
-        <!--<canvas id="start-btn-canvas" width="50" height="100"></canvas>-->
     </div>
-    <div id="message" class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close hide" data-dismiss="alert">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-        </button>
-        <span id="message-content"></span>
-        该产品第一次扫码, 为正品, 鉴定完毕!!!
+    <div id="message" class="alert alert-warning alert-dismissible hide" role="alert">
+        <!--<button type="button" class="close hide" data-dismiss="alert">-->
+            <!--<span aria-hidden="true">&times;</span>-->
+            <!--<span class="sr-only">Close</span>-->
+        <!--</button>-->
+        <span id="message-content"> </span>
     </div>
     <div class="background hide">
         <ul class="prizes">
@@ -69,7 +67,7 @@
             </tr>
             <tr>
                 <td>扫码次数</td>
-                <td>3次</td>
+                <td id="scan_count">2<span>次</span></td>
             </tr>
             <tr>
                 <td>扫码地点</td>
@@ -88,8 +86,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                            class="sr-only">Close</span></button>
                 <h4 class="modal-title">抽奖结果</h4>
             </div>
             <div class="modal-body">
@@ -106,16 +102,15 @@
 <div id="init-param" class="hide">
     <div id="token">token</div>
     <div id="id">id</div>
-    <div id="received">received</div>
-    <div id="drawn">drawn</div>
+    <div id="_csrf">_csrf</div>
+    <div id="received">0</div>
+    <div id="drawn">0</div>
     <div id="type">type</div>
     <div id="msg">msg</div>
 </div>
 
 <script type="text/javascript" src="http://tiankun.me/signature.js"></script>
-<!--<script type="text/javascript" src="js/start-btn.js"></script>-->
 <script type="text/javascript" src="lib/jquery.min.js"></script>
-<script type="text/javascript" src="lib/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/marquee.js"></script>
 <script type="text/javascript" src="js/main.js"></script>

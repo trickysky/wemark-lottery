@@ -143,7 +143,7 @@ body {
 }
 
 #prod_info {
-    margin-top: 15%;
+    margin-top: 30px;
     padding-bottom: 10%;
 }
 
@@ -173,21 +173,9 @@ body {
     border: none;
 }
 
-/*#start-btn {*/
-    /*color: #b95412;*/
-    /*text-decoration: none;*/
-/*}*/
-
-/*#start-btn:hover {*/
-    /*color: red;*/
-    /*text-decoration: none;*/
-    /*cursor: pointer;*/
-/*}*/
-
 #message {
     background-color: #ffcd46;
     border: none;
-    margin-top: 30%;
 }
 
 #start-btn-canvas {
@@ -196,20 +184,17 @@ body {
 
 #start-btn {
     font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-    font-size: 1.5em;
+    font-size: 1.2em;
     text-transform: uppercase;
     padding: 7px 20px;
     position: absolute;
-    /*left: 50%;*/
-    width: 200px;
-    /*margin-left: -100px;*/
-    /*top: 50%;*/
+    width: 160px;
     border-radius: 10px;
     color: white;
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.8);
     border: 5px solid transparent;
     border-bottom-color: rgba(0, 0, 0, 0.35);
-    background: hsla(260, 100%, 50%, 1);
+    background: hsla(196, 100%, 50%, 1);
     cursor: pointer;
     outline: 0 !important;
     animation: pulse 1s infinite alternate;
@@ -234,4 +219,21 @@ body {
     100% {
         margin-top: 6px;
     }
+}
+
+#start {
+    min-height: 100px;
+}
+
+.disable-btn {
+    background-color: #b1b0b0;
+    color: #484545;
+    text-decoration: none;
+}
+
+.disable-btn:hover {
+    background-color: #b1b0b0;
+    color: #484545;
+    text-decoration: none;
+    cursor: default;
 }
