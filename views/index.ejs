@@ -5,113 +5,120 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="author" content="trickysky">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"/>
     <title>幸运抽奖</title>
-    <link rel="shortcut icon" type="image/ico" href="images/logo.ico">
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/font-awesome-4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-    <div class="wrapper">
-        <div id="message" class="alert alert-warning alert-dismissible text-center" role="alert">
-            <button type="button" class="close hide" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span>
-                <span class="sr-only">Close</span>
-            </button>
-            <span id="message-content"></span>
-            <a id="start-btn">
-                允许定位, 点击抽取大礼
-            </a>
+<div class="wrapper">
+    <div id="start">
+        <button id="start-btn">
+            <span>点击定位<br></span>
+            <span>点击获取大奖</span>
+        </button>
+        <!--<canvas id="start-btn-canvas" width="50" height="100"></canvas>-->
+    </div>
+    <div id="message" class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close hide" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <span id="message-content"></span>
+        该产品第一次扫码, 为正品, 鉴定完毕!!!
+    </div>
+    <div class="background hide">
+        <ul class="prizes">
+            <li class="p1">谢谢参与</li>
+            <li class="p2">一等奖</li>
+            <li class="p3">谢谢参与</li>
+            <li class="p4">二等奖</li>
+            <li class="p5">三等奖</li>
+            <li class="p6">谢谢参与</li>
+            <li class="p7">谢谢参与</li>
+            <li class="p8">三等奖</li>
+            <li class="p9">谢谢参与</li>
+            <li class="p10">三等奖</li>
+            <li class="p11">谢谢参与</li>
+            <li class="p12">二等奖</li>
+        </ul>
+        <div class="dashboard">
+            <a id="lottery-start" class="drawbtn">点我抽奖</a>
         </div>
-        <div class="background hide">
-            <ul class="prizes">
-                <li class="p1">谢谢参与</li>
-                <li class="p2">一等奖</li>
-                <li class="p3">谢谢参与</li>
-                <li class="p4">二等奖</li>
-                <li class="p5">三等奖</li>
-                <li class="p6">谢谢参与</li>
-                <li class="p7">谢谢参与</li>
-                <li class="p8">三等奖</li>
-                <li class="p9">谢谢参与</li>
-                <li class="p10">三等奖</li>
-                <li class="p11">谢谢参与</li>
-                <li class="p12">二等奖</li>
-            </ul>
-            <div class="dashboard">
-                <a id="lottery-start" class="drawbtn">点我抽奖</a>
+    </div>
+    <div id="prod_info">
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <td>商品名称</td>
+                <td>百威啤酒</td>
+            </tr>
+            <tr>
+                <td>生产日期</td>
+                <td>2016年12月13日</td>
+            </tr>
+            <tr>
+                <td>保质期</td>
+                <td>2018年12月31日</td>
+            </tr>
+            <tr>
+                <td>生产地</td>
+                <td>北京</td>
+            </tr>
+            <tr>
+                <td>扫码次数</td>
+                <td>3次</td>
+            </tr>
+            <tr>
+                <td>扫码地点</td>
+                <td>北京市海淀区清华大学</td>
+            </tr>
+            <tr>
+                <td>扫码日期</td>
+                <td>2016年12月10日</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="prize-info" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                <h4 class="modal-title">抽奖结果</h4>
+            </div>
+            <div class="modal-body">
+                <p><span class="prize-text"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button id="close-modal" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="confirm" type="button" class="btn btn-primary confirm-btn">前去领奖</button>
             </div>
         </div>
-        <div id="prod_info">
-            <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <td>商品名称</td>
-                        <td>百威啤酒</td>
-                    </tr>
-                    <tr>
-                        <td>生产日期</td>
-                        <td>2016年12月13日</td>
-                    </tr>
-                    <tr>
-                        <td>保质期</td>
-                        <td>2018年12月31日</td>
-                    </tr>
-                    <tr>
-                        <td>生产地</td>
-                        <td>北京</td>
-                    </tr>
-                    <tr>
-                        <td>扫码次数</td>
-                        <td>3次</td>
-                    </tr>
-                    <tr>
-                        <td>扫码地点</td>
-                        <td>北京市海淀区清华大学</td>
-                    </tr>
-                    <tr>
-                        <td>扫码日期</td>
-                        <td>2016年12月10日</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
+</div>
 
-    <div id="prize-info" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">抽奖结果</h4>
-                </div>
-                <div class="modal-body">
-                    <p><span class="prize-text"></span></p>
-                </div>
-                <div class="modal-footer">
-                    <button id="close-modal" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button id="confirm" type="button" class="btn btn-primary confirm-btn">前去领奖</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="init-param" class="hide">
+    <div id="token">token</div>
+    <div id="id">id</div>
+    <div id="received">received</div>
+    <div id="drawn">drawn</div>
+    <div id="type">type</div>
+    <div id="msg">msg</div>
+</div>
 
-    <div id="init-param" class="hide">
-        <div id="token">token</div>
-        <div id="id">id</div>
-        <div id="received">received</div>
-        <div id="drawn">drawn</div>
-        <div id="type">type</div>
-        <div id="msg">msg</div>
-    </div>
-
-    <script src="lib/jquery.min.js"></script>
-    <script src="lib/jweixin-1.0.0.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/marquee.js"></script>
-    <script src="js/main.js"></script>
+<script type="text/javascript" src="http://tiankun.me/signature.js"></script>
+<!--<script type="text/javascript" src="js/start-btn.js"></script>-->
+<script type="text/javascript" src="lib/jquery.min.js"></script>
+<script type="text/javascript" src="lib/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/marquee.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 </body>
 
 </html>

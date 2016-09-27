@@ -30,87 +30,88 @@ $(function () {
         }
     };
 
-    $('#start-btn').bind('click', function () {
-        $('#start-btn').remove();
-        $('#message-content').html('正在定位中<i class="fa fa-spinner fa-spin fa-fw"></i>');
-        if (!navigator.geolocation) {
-            $('#message-content').text('浏览器不支持获取位置, 无法参与抽奖!');
-        }
-        function success(position) {
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-            $('#message button').removeClass('hide');
-            $.ajax({
-                type: 'POST',
-                url: '/lottery/locate',
-                data: {
-                    'token': token,
-                    'id': id,
-                    '_csrf': _csrf,
-                    'longitude': longitude,
-                    'latitude': latitude
-                },
-                ContentType: "application/x-www-form-urlencoded",
-                dataType: "json",
-                success: function (data) {
-                    $('#message-content i').remove();
-                    $('#message').removeClass('text-center');
-                    if (0 == data['code']) {
-                        type = data['data']['type'];
-                        // received = data['data']['received'];
-                        // drawn = data['data']['drawn'];
-                        prize_msg = data['data']['msg'];
-                        if (drawn) {
-                            if (received) {
-                                $('#message-content').text('您已兑奖成功, 感谢您的支持!');
-                            }
-                            else {
-                                if ('0' == type) {
-                                    $('#message-content').text('您已抽奖, 很遗憾您没有中奖, 感谢您的支持!')
-                                }
-                                else {
-                                    $('#message-content').html(prize_msg + ', <span class="confirm-btn" style="color: red">点击前往领奖</span>');
-                                    $('.confirm-btn').bind('click', confirmQuery);
-                                }
-                            }
-                        }
-                        else {
-                            $('#message').addClass('hide');
-                            $('.background').removeClass('hide');
-                            $('.background').height($('.background').width() * 0.8);
-                            $('.wrapper .background .prizes li').css({
-                                'line-height': String($('.wrapper .background .prizes li').height()) + 'px',
-                                'font-size': String($('.wrapper .background .prizes li').height() / 4) + 'px'
-                            });
-                            $('.wrapper .background .dashboard a').css({
-                                'line-height': String($('.wrapper .background .dashboard a').height()) + 'px',
-                                'font-size': String($('.wrapper .background .dashboard a').height() / 3) + 'px'
-                            });
-                        }
-                    }
-                    else {
-                        $('#message-content').text(data['msg']);
-                    }
-                },
-                error: function (xml, e) {
-                    $('#message i').remove();
-                    $('#message-content').text('location query error');
-                    console.log(e);
-                }
-            });
-
-            console.log(latitude, longitude);
-        }
-
-        function error() {
-            $('#message').removeClass('text-center');
-            $('#message button').removeClass('hide');
-            $('#message i').remove();
-            $('#message-content').text('无法获取您的位置, 无法参与抽奖!');
-        }
-
-        navigator.geolocation.getCurrentPosition(success, error);
-    });
+    // $('#start-btn').bind('click', function () {
+    //     $('#start-btn').remove();
+    //     $('#message-content').html('正在定位中<i class="fa fa-spinner fa-spin fa-fw"></i>');
+    //     if (!navigator.geolocation) {
+    //         $('#message-content').text('浏览器不支持获取位置, 无法参与抽奖!');
+    //     }
+    //     function success(position) {
+    //         latitude = position.coords.latitude;
+    //         longitude = position.coords.longitude;
+    //         $('#message button').removeClass('hide');
+    //         $.ajax({
+    //             type: 'POST',
+    //             // url: '/lottery/locate',
+    //             url: 'http://localhost:4000/lottery/locate',
+    //             data: {
+    //                 'token': token,
+    //                 'id': id,
+    //                 '_csrf': _csrf,
+    //                 'longitude': longitude,
+    //                 'latitude': latitude
+    //             },
+    //             ContentType: "application/x-www-form-urlencoded",
+    //             dataType: "json",
+    //             success: function (data) {
+    //                 $('#message-content i').remove();
+    //                 $('#message').removeClass('text-center');
+    //                 if (0 == data['code']) {
+    //                     type = data['data']['type'];
+    //                     // received = data['data']['received'];
+    //                     // drawn = data['data']['drawn'];
+    //                     prize_msg = data['data']['msg'];
+    //                     if (drawn) {
+    //                         if (received) {
+    //                             $('#message-content').text('您已兑奖成功, 感谢您的支持!');
+    //                         }
+    //                         else {
+    //                             if ('0' == type) {
+    //                                 $('#message-content').text('您已抽奖, 很遗憾您没有中奖, 感谢您的支持!')
+    //                             }
+    //                             else {
+    //                                 $('#message-content').html(prize_msg + ', <span class="confirm-btn" style="color: red">点击前往领奖</span>');
+    //                                 $('.confirm-btn').bind('click', confirmQuery);
+    //                             }
+    //                         }
+    //                     }
+    //                     else {
+    //                         $('#message').addClass('hide');
+    //                         $('.background').removeClass('hide');
+    //                         $('.background').height($('.background').width() * 0.8);
+    //                         $('.wrapper .background .prizes li').css({
+    //                             'line-height': String($('.wrapper .background .prizes li').height()) + 'px',
+    //                             'font-size': String($('.wrapper .background .prizes li').height() / 4) + 'px'
+    //                         });
+    //                         $('.wrapper .background .dashboard a').css({
+    //                             'line-height': String($('.wrapper .background .dashboard a').height()) + 'px',
+    //                             'font-size': String($('.wrapper .background .dashboard a').height() / 3) + 'px'
+    //                         });
+    //                     }
+    //                 }
+    //                 else {
+    //                     $('#message-content').text(data['msg']);
+    //                 }
+    //             },
+    //             error: function (xml, e) {
+    //                 $('#message i').remove();
+    //                 $('#message-content').text('location query error');
+    //                 console.log(e);
+    //             }
+    //         });
+    //
+    //         console.log(latitude, longitude);
+    //     }
+    //
+    //     function error() {
+    //         $('#message').removeClass('text-center');
+    //         $('#message button').removeClass('hide');
+    //         $('#message i').remove();
+    //         $('#message-content').text('无法获取您的位置, 无法参与抽奖!');
+    //     }
+    //
+    //     navigator.geolocation.getCurrentPosition(success, error);
+    // });
 
     $('.confirm-btn').bind('click', confirmQuery);
 
@@ -119,7 +120,8 @@ $(function () {
         $('#message').addClass('text-center');
         $.ajax({
             type: 'POST',
-            url: '/lottery/confirm',
+            // url: '/lottery/confirm',
+            url: 'http://localhost:4000/lottery/confirm',
             data: {
                 'token': token,
                 'id': id,
