@@ -81,15 +81,15 @@ $(function () {
                         }
                         else {
                             $('#message').addClass('hide');
-                            $('.background').removeClass('hide');
-                            $('.background').height($('.background').width() * 0.8);
-                            $('.wrapper .background .prizes li').css({
-                                'line-height': String($('.wrapper .background .prizes li').height()) + 'px',
-                                'font-size': String($('.wrapper .background .prizes li').height() / 4) + 'px'
+                            $('#marquee').removeClass('hide');
+                            $('#marquee').find('.background').height($('.background').width() * 0.8);
+                            $('#marquee').find('.background .prizes li').css({
+                                'line-height': String($('#marquee').find('.background .prizes li').height()) + 'px',
+                                'font-size': String($('#marquee').find('.background .prizes li').height() / 4) + 'px'
                             });
-                            $('.wrapper .background .dashboard a').css({
-                                'line-height': String($('.wrapper .background .dashboard a').height()) + 'px',
-                                'font-size': String($('.wrapper .background .dashboard a').height() / 3) + 'px'
+                            $('#marquee').find('.background .dashboard a').css({
+                                'line-height': String($('#marquee').find('.background .dashboard a').height()) + 'px',
+                                'font-size': String($('#marquee').find('.background .dashboard a').height() / 3) + 'px'
                             });
                         }
                     }
