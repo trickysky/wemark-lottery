@@ -201,7 +201,7 @@ $(function () {
                 $('#feedback').find('.form-control').attr('disabled', 'disabled');
                 $.ajax({
                     type: 'POST',
-                    url: '/lottery/feedback',
+                    url: '/site/feedback',
                     // url: 'http://localhost:4000/lottery/feedback',
                     data: {
                        'feedback': feedback
