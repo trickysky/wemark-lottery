@@ -35,86 +35,83 @@ $(function () {
         }
     };
 
-    $('#start-btn').bind('click', function () {
-        $('#start-btn').remove();
-        $('#message').addClass('text-center');
-        $('#message-content').html('正在定位中<i class="fa fa-spinner fa-spin fa-fw"></i>');
-        if (!navigator.geolocation) {
-            $('#message-content').text('浏览器不支持获取位置, 无法参与抽奖!');
-        }
-        function success(position) {
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-            $('#message').find('button').removeClass('hide');
-            $.ajax({
-                type: 'POST',
-                // url: '/lottery/locate',
-                url: 'http://localhost:4000/lottery/locate',
-                data: {
-                    'token': token,
-                    'id': id,
-                    '_csrf': _csrf,
-                    'longitude': longitude,
-                    'latitude': latitude
-                },
-                ContentType: "application/x-www-form-urlencoded",
-                dataType: "json",
-                success: function (data) {
-                    $('#message-content').find('i').remove();
-                    $('#message').removeClass('text-center');
-                    if (0 == data['code']) {
-                        type = data['data']['type'];
-                        prize_msg = data['data']['msg'];
-                        if (drawn) {
-                            if (received) {
-                                $('#message-content').text('您已兑奖成功, 感谢您的支持!');
-                            }
-                            else {
-                                if ('0' == type) {
-                                    $('#message-content').text('您已抽奖, 很遗憾您没有中奖, 感谢您的支持!')
-                                }
-                                else {
-                                    $('#message-content').html(prize_msg + ', <span class="confirm-btn" style="color: red">点击前往领奖</span>');
-                                    $('.confirm-btn').bind('click', confirmQuery);
-                                }
-                            }
+
+    function getLocationSuccess(position) {
+        longitude = position['lng'];
+        latitude = position['lat'];
+        $('#message').find('button').removeClass('hide');
+        $.ajax({
+            type: 'POST',
+            // url: '/lottery/locate',
+            url: 'http://localhost:4000/lottery/locate',
+            data: {
+                'token': token,
+                'id': id,
+                '_csrf': _csrf,
+                'longitude': longitude,
+                'latitude': latitude
+            },
+            ContentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            success: function (data) {
+                $('#message-content').find('i').remove();
+                $('#message').removeClass('text-center');
+                if (0 == data['code']) {
+                    type = data['data']['type'];
+                    prize_msg = data['data']['msg'];
+                    if (drawn) {
+                        if (received) {
+                            $('#message-content').text('您已兑奖成功, 感谢您的支持!');
                         }
                         else {
-                            $('#message').addClass('hide');
-                            $('#marquee').removeClass('hide');
-                            $('#marquee').find('.background').height($('.background').width() * 0.8);
-                            $('#marquee').find('.background .prizes li').css({
-                                'line-height': String($('#marquee').find('.background .prizes li').height()) + 'px',
-                                'font-size': String($('#marquee').find('.background .prizes li').height() / 4) + 'px'
-                            });
-                            $('#marquee').find('.background .dashboard a').css({
-                                'line-height': String($('#marquee').find('.background .dashboard a').height()) + 'px',
-                                'font-size': String($('#marquee').find('.background .dashboard a').height() / 3) + 'px'
-                            });
+                            if ('0' == type) {
+                                $('#message-content').text('您已抽奖, 很遗憾您没有中奖, 感谢您的支持!')
+                            }
+                            else {
+                                $('#message-content').html(prize_msg + ', <span class="confirm-btn" style="color: red">点击前往领奖</span>');
+                                $('.confirm-btn').bind('click', confirmQuery);
+                            }
                         }
                     }
                     else {
-                        $('#message-content').text(data['msg']);
+                        $('#message').addClass('hide');
+                        $('#marquee').removeClass('hide');
+                        $('#marquee').find('.background').height($('.background').width() * 0.8);
+                        $('#marquee').find('.background .prizes li').css({
+                            'line-height': String($('#marquee').find('.background .prizes li').height()) + 'px',
+                            'font-size': String($('#marquee').find('.background .prizes li').height() / 4) + 'px'
+                        });
+                        $('#marquee').find('.background .dashboard a').css({
+                            'line-height': String($('#marquee').find('.background .dashboard a').height()) + 'px',
+                            'font-size': String($('#marquee').find('.background .dashboard a').height() / 3) + 'px'
+                        });
                     }
-                },
-                error: function (xml, e) {
-                    $('#message').find('i').remove();
-                    $('#message-content').text('location query error');
-                    console.log(e);
                 }
-            });
+                else {
+                    $('#message-content').text(data['msg']);
+                }
+            },
+            error: function (xml, e) {
+                $('#message').find('i').remove();
+                $('#message-content').text('location query error');
+                console.log(e);
+            }
+        });
+        console.log(latitude, longitude);
+    }
+    function getLocationerr() {
+        $('#message').removeClass('text-center');
+        $('#message').find('button').removeClass('hide');
+        $('#message').find('i').remove();
+        $('#message-content').text('无法获取您的位置, 无法参与抽奖!');
+    }
 
-            console.log(latitude, longitude);
-        }
-
-        function error() {
-            $('#message').removeClass('text-center');
-            $('#message').find('button').removeClass('hide');
-            $('#message').find('i').remove();
-            $('#message-content').text('无法获取您的位置, 无法参与抽奖!');
-        }
-
-        navigator.geolocation.getCurrentPosition(success, error);
+    $('#start-btn').bind('click', function () {
+        var location = new qq.maps.Geolocation("MW4BZ-Z3KRX-FLS43-TXYL6-LFULE-7ZBRJ", "wemark-lottery");
+        location.getLocation(getLocationSuccess, getLocationerr, {timeout: 8000});
+        $('#start-btn').remove();
+        $('#message').addClass('text-center');
+        $('#message-content').html('正在定位中<i class="fa fa-spinner fa-spin fa-fw"></i>');
     });
 
     $('.confirm-btn').bind('click', confirmQuery);
