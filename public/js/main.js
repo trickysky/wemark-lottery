@@ -43,13 +43,13 @@ $(function () {
             $('#message-content').text('浏览器不支持获取位置, 无法参与抽奖!');
         }
         function success(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
             $('#message').find('button').removeClass('hide');
             $.ajax({
                 type: 'POST',
-                url: '/lottery/locate',
-                // url: 'http://localhost:4000/lottery/locate',
+                // url: '/lottery/locate',
+                url: 'http://localhost:4000/lottery/locate',
                 data: {
                     'token': token,
                     'id': id,
@@ -127,8 +127,8 @@ $(function () {
         $('#message').addClass('text-center');
         $.ajax({
             type: 'POST',
-            url: '/lottery/confirm',
-            // url: 'http://localhost:4000/lottery/confirm',
+            // url: '/lottery/confirm',
+            url: 'http://localhost:4000/lottery/confirm',
             data: {
                 'token': token,
                 'id': id,
@@ -192,5 +192,34 @@ $(function () {
                 $('#prize-info').modal('show');
             }
         })
+    });
+
+    $('#feedback-text').bind('click', function () {
+        $('#feedback-text').addClass('hide');
+        $('#feedback').find('.input-group').removeClass('hide');
+        $('#feedback-check-btn').bind('click', function () {
+            var feedback = $('#feedback').find('.form-control').val();
+            if (feedback) {
+                $('#feedback-check-btn').html('<i class="fa fa-spinner fa-spin fa-fw"></i>');
+                $('#feedback').find('.form-control').attr('disabled', 'disabled');
+                $.ajax({
+                    type: 'POST',
+                    // url: '/lottery/feedback',
+                    url: 'http://localhost:4000/lottery/feedback',
+                    data: {
+                       'feedback': feedback
+                    },
+                    dataType: "json",
+                    ContentType: "application/x-www-form-urlencoded",
+                    success: function (data) {
+                        if (0 == data['code']) {
+                            $('#feedback-check-btn').html('<i class="fa fa-check" aria-hidden="true"></i>');
+                            $('#feedback-check-btn').attr('disabled', 'disabled');
+                            $('#feedback-check-btn').unbind('click');
+                        }
+                    }
+                });
+            }
+        });
     });
 });

@@ -34,4 +34,11 @@ app.post('/lottery/confirm', function (req, res) {
     });
 });
 
+app.post('/lottery/feedback', function (req, res) {
+    res.send({
+        "code": 0,
+        "msg": "lalala"
+    });
+});
+
 app.listen(4000);
