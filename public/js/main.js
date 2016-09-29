@@ -42,8 +42,8 @@ $(function () {
         $('#message').find('button').removeClass('hide');
         $.ajax({
             type: 'POST',
-            // url: '/lottery/locate',
-            url: 'http://localhost:4000/lottery/locate',
+            url: '/lottery/locate',
+            // url: 'http://localhost:4000/lottery/locate',
             data: {
                 'token': token,
                 'id': id,
@@ -124,8 +124,8 @@ $(function () {
         $('#message').addClass('text-center');
         $.ajax({
             type: 'POST',
-            // url: '/lottery/confirm',
-            url: 'http://localhost:4000/lottery/confirm',
+            url: '/lottery/confirm',
+            // url: 'http://localhost:4000/lottery/confirm',
             data: {
                 'token': token,
                 'id': id,
@@ -201,8 +201,8 @@ $(function () {
                 $('#feedback').find('.form-control').attr('disabled', 'disabled');
                 $.ajax({
                     type: 'POST',
-                    // url: '/lottery/feedback',
-                    url: 'http://localhost:4000/lottery/feedback',
+                    url: '/lottery/feedback',
+                    // url: 'http://localhost:4000/lottery/feedback',
                     data: {
                        'feedback': feedback
                     },
